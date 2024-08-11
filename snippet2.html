@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programming Languages Wiki</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #e0e0e0;
+            background-color: #002b36; /* Solarized Dark background */
+        }
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+        .sidebar {
+            width: 250px;
+            background-color: #073642; /* Solarized Dark sidebar */
+            padding: 20px;
+            box-sizing: border-box;
+            border-right: 1px solid rgba(255, 255, 255, 0.2);
+            overflow-y: auto;
+            height: 100%;
+        }
+        .content {
+            flex: 1;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-y: auto;
+            padding-right: 30px; /* Ensure space to avoid horizontal scroll */
+        }
+        .section {
+            display: none;
+            margin-bottom: 20px;
+        }
+        .section.active {
+            display: block;
+        }
+        .section h2 {
+            margin-top: 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding-bottom: 10px;
+        }
+        .nested {
+            display: none;
+            padding-left: 20px;
+        }
+        .nested ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .nested li {
+            margin-bottom: 5px;
+        }
+        .directory-structure {
+            white-space: pre;
+            font-family: monospace;
+            color: #839496; /* Solarized base0 */
+            background-color: #073642; /* Solarized Dark background */
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #586e75; /* Solarized base1 */
+        }
+        .keyword {
+            color: #d33682; /* Magenta */
+        }
+        .comment {
+            color: #657b83; /* Solarized comments */
+        }
+        a {
+            color: #268bd2; /* Solarized blue */
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        code {
+            color: #cb4b16; /* Orange for code keywords */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h1>Index</h1>
+            <div>
+                <h2 onclick="toggleSection('swift-section')">Swift</h2>
+                <div id="swift-section" class="nested">
+                    <ul>
+                        <li><a href="#" onclick="showSubsection('type-swift-section')">Types</a></li>
+                        <li><a href="#" onclick="showSubsection('control-flow-swift-section')">Control Flow</a></li>
+                        <li><a href="#" onclick="showSubsection('loops-swift-section')">Loops</a></li>
+                        <li><a href="#" onclick="showSubsection('conditions-swift-section')">Conditions</a></li>
+                        <li><a href="#" onclick="showSubsection('additional-swift-section')">Additional Information</a></li>
+                        <li><a href="#" onclick="showSubsection('resources-swift-section')">Resources</a></li>
+                        <li><a href="#" onclick="showSubsection('faq-swift-section')">FAQ</a></li>
+                    </ul>
+                </div>
+                <h2 onclick="toggleSection('kmp-section')">KMP</h2>
+                <div id="kmp-section" class="nested">
+                    <ul>
+                        <li><a href="#" onclick="showSubsection('kmp-structure-section')">Project Structure</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <div id="swift-section-content" class="section">
+                <h2>Swift</h2>
+                <p>This section provides information about the Swift programming language.</p>
+            </div>
+
+            <div id="type-swift-section" class="section">
+                <h2>Types in Swift</h2>
+                <p>Swift provides a rich set of data types for working with different kinds of data. The primary types include:</p>
+                <ul>
+                    <li><span class="keyword">Int</span>: Represents integer values.</li>
+                    <li><span class="keyword">Double</span> and <span class="keyword">Float</span>: Represent floating-point numbers.</li>
+                    <li><span class="keyword">String</span>: Represents a sequence of characters.</li>
+                    <li><span class="keyword">Bool</span>: Represents a Boolean value, either <code>true</code> or <code>false</code>.</li>
+                    <li><span class="keyword">Array</span>: Represents a collection of values of the same type.</li>
+                    <li><span class="keyword">Dictionary</span>: Represents a collection of key-value pairs.</li>
+                </ul>
+
+                <h3>Optional Types</h3>
+                <p>Optional types in Swift allow a variable to hold either a value or <code>nil</code> (no value). This is useful for cases where a variable may not have a value. An optional is defined by appending a question mark <code>?</code> to the type:</p>
+                <pre><code class="comment">// Example of optional types in Swift</code>
+<code>var name: <span class="keyword">String</span>? = "Alice" // An optional <span class="keyword">String</span>
+name = <span class="keyword">nil</span> // Now the variable has no value
+</code></pre>
+
+                <h3>Unwrapping Optionals</h3>
+                <p>Unwrapping is the process of accessing the value inside an optional. There are several ways to unwrap optionals:</p>
+                <ul>
+                    <li><strong>Forced Unwrapping</strong>: Use the exclamation mark <code>!</code> to force unwrap an optional. This should be used cautiously as it can cause runtime crashes if the optional is <code>nil</code>.</li>
+                    <pre><code class="comment">// Forced unwrapping</code>
+<code>let unwrappedName: <span class="keyword">String</span> = name! // Assumes name is not <span class="keyword">nil</span></code></pre>
+
+                    <li><strong>Optional Binding</strong>: Use <code>if let</code> or <code>guard let</code> to safely unwrap an optional. This method checks if the optional contains a value and binds it to a new constant if it does.</li>
+                    <pre><code class="comment">// Optional binding with if let</code>
+<code>if let unwrappedName = name {
+    print("Name is \(unwrappedName)")
+} else {
+    print("Name is <span class="keyword">nil</span>")
+}</code></pre>
+
+                    <pre><code class="comment">// Optional binding with guard let</code>
+<code>func greet() {
+    guard let unwrappedName = name else {
+        print("Name is <span class="keyword">nil</span>")
+        return
+    }
+    print("Hello, \(unwrappedName)")
+}</code></pre>
+                </ul>
+
+                <h3>Arrays</h3>
+                <p>Arrays in Swift are used to store ordered collections of values. You can create an array with specific types, add elements to it, and access elements by their index. Here are some examples:</p>
+                <pre><code class="comment">// Creating an array of integers</code>
+<code>var numbers: [<span class="keyword">Int</span>] = [1, 2, 3, 4, 5]</code></pre>
+
+                <pre><code class="comment">// Accessing an element in the array</code>
+<code>let firstNumber = numbers[0] // 1</code></pre>
+
+                <pre><code class="comment">// Adding an element to the array</code>
+<code>numbers.append(6)</code></pre>
+
+                <pre><code class="comment">// Iterating over an array</code>
+<code>for number in numbers {
+    print(number)
+}</code></pre>
+
+                <pre><code class="comment">// Creating an array with a default value</code>
+<code>let defaultArray = Array(repeating: 0, count: 5) // [0, 0, 0, 0, 0]</code></pre>
+            </div>
+
+            <div id="control-flow-swift-section" class="section">
+                <h2>Control Flow in Swift</h2>
+                <p>Swift provides several control flow constructs to control the execution of code:</p>
+                <ul>
+                    <li><strong>if</strong>: Executes code if a condition is true.</li>
+                    <li><strong>if-else</strong>: Executes one block if true, another if false.</li>
+                    <li><strong>switch</strong>: Matches a value against cases and executes corresponding code.</li>
+                    <li><strong>guard</strong>: Used for early exit if a condition is not met.</li>
+                </ul>
+
+                <h3>Examples</h3>
+                <ul>
+                    <li><strong>if</strong>: Checks if a condition is true and executes code accordingly.</li>
+                    <pre><code class="comment">// Example of if statement</code>
+<code>let number = 10
+
+if number > 5 {
+    print("Number is greater than 5")
+} else {
+    print("Number is 5 or less")
+}</code></pre>
+
+                    <li><strong>switch</strong>: Provides a way to perform different actions based on the value of a variable.</li>
+                    <pre><code class="comment">// Example of switch statement</code>
+<code>let day = "Saturday"
+
+switch day {
+case "Saturday", "Sunday":
+    print("It's the weekend")
+default:
+    print("It's a weekday")
+}</code></pre>
+
+                    <li><strong>guard</strong>: Used for early exits if a condition is not met, typically used in functions.</li>
+                    <pre><code class="comment">// Example of guard statement</code>
+<code>func processOrder(order: <span class="keyword">String</span>?) {
+    guard let unwrappedOrder = order else {
+        print("Order is <span class="keyword">nil</span>")
+        return
+    }
+    print("Processing order: \(unwrappedOrder)")
+}</code></pre>
+
+                    <li><strong>if let</strong>: Used for optional binding, allowing you to unwrap optionals in a conditional statement.</li>
+                    <pre><code class="comment">// Example of if let statement</code>
+<code>if let unwrappedOrder = order {
+    print("Order is \(unwrappedOrder)")
+} else {
+    print("Order is <span class="keyword">nil</span>")
+}</code></pre>
+                </ul>
+            </div>
+
+            <div id="loops-swift-section" class="section">
+                <h2>Loops in Swift</h2>
+                <p>Swift provides several types of loops to execute code repeatedly:</p>
+                <ul>
+                    <li><strong>for-in</strong>: Iterates over a sequence, such as ranges, arrays, or dictionaries.</li>
+                    <pre><code class="comment">// Example of for-in loop</code>
+<code>for i in 1...5 {
+    print(i) // Prints numbers from 1 to 5
+}</code></pre>
+
+                    <pre><code class="comment">// Example of for-in loop with array</code>
+<code>let names = ["Alice", "Bob", "Charlie"]
+
+for name in names {
+    print(name)
+}</code></pre>
+
+                    <li><strong>while</strong>: Executes a block of code as long as a condition is true.</li>
+                    <pre><code class="comment">// Example of while loop</code>
+<code>var i = 1
+while i <= 5 {
+    print(i)
+    i += 1
+}</code></pre>
+
+                    <li><strong>repeat-while</strong>: Similar to while, but executes the block of code at least once before checking the condition.</li>
+                    <pre><code class="comment">// Example of repeat-while loop</code>
+<code>var i = 1
+repeat {
+    print(i)
+    i += 1
+} while i <= 5</code></pre>
+                </ul>
+            </div>
+
+            <div id="conditions-swift-section" class="section">
+                <h2>Conditions in Swift</h2>
+                <p>Conditions help control the flow of your program based on certain criteria. Swift supports:</p>
+                <ul>
+                    <li><strong>if</strong>: Executes code if a condition is true.</li>
+                    <li><strong>if-else</strong>: Executes one block if true, another if false.</li>
+                    <li><strong>switch</strong>: Matches a value against cases and executes corresponding code.</li>
+                    <li><strong>guard</strong>: Used for early exit if a condition is not met.</li>
+                </ul>
+                <p>Example:</p>
+                <pre><code class="comment">// Example of conditions in Swift</code>
+<code>let temperature = 25
+
+if temperature > 30 {
+    print("It's hot outside")
+} else if temperature > 20 {
+    print("It's warm outside")
+} else {
+    print("It's cold outside")
+}
+
+let day = "Monday"
+
+switch day {
+case "Saturday", "Sunday":
+    print("Weekend")
+default:
+    print("Weekday")
+}
+
+// Using guard for early exit
+func checkTemperature(temp: <span class="keyword">Int</span>?) {
+    guard let temp = temp, temp > 0 else {
+        print("Temperature is <span class="keyword">nil</span> or invalid")
+        return
+    }
+    print("Temperature is \(temp)")
+}
+</code></pre>
+            </div>
+
+            <div id="additional-swift-section" class="section">
+                <h2>Additional Information on Swift</h2>
+                <p>Swift is a powerful and intuitive programming language for iOS, macOS, watchOS, and tvOS. Some additional features include:</p>
+                <ul>
+                    <li><strong>Optionals</strong>: Represents a variable that may hold a value or be <code>nil</code>.</li>
+                    <li><strong>Protocols</strong>: Define a blueprint of methods, properties, and other requirements that suit a particular piece of functionality.</li>
+                    <li><strong>Extensions</strong>: Allow you to add new functionality to an existing class, struct, or enum.</li>
+                    <li><strong>Generics</strong>: Enable you to write flexible and reusable code that can work with any type.</li>
+                </ul>
+            </div>
+
+            <div id="resources-swift-section" class="section">
+                <h2>Resources for Swift</h2>
+                <p>Here are some recommended resources for learning Swift:</p>
+                <ul>
+                    <li><a href="https://developer.apple.com/swift/" target="_blank">Swift Official Documentation</a></li>
+                    <li><a href="https://www.hackingwithswift.com/" target="_blank">Hacking with Swift</a></li>
+                    <li><a href="https://www.raywenderlich.com/swift" target="_blank">Ray Wenderlich - Swift Tutorials</a></li>
+                    <li><a href="https://www.udemy.com/topic/swift/" target="_blank">Udemy Swift Courses</a></li>
+                </ul>
+            </div>
+
+            <div id="faq-swift-section" class="section">
+                <h2>Swift FAQ</h2>
+                <p>Here are some frequently asked questions about Swift:</p>
+                <ul>
+                    <li><strong>What is Swift?</strong> Swift is a powerful and easy-to-learn programming language for iOS, macOS, watchOS, and tvOS development.</li>
+                    <li><strong>Is Swift open source?</strong> Yes, Swift is open-source and has a vibrant community of developers.</li>
+                    <li><strong>Can I use Swift for server-side development?</strong> Yes, Swift can be used for server-side development with frameworks like Vapor and Kitura.</li>
+                    <li><strong>How do I get started with Swift?</strong> You can get started with Swift by exploring the official documentation, online tutorials, and courses.</li>
+                </ul>
+            </div>
+
+            <div id="kmp-structure-section" class="section">
+                <h2>Project Structure for KMP</h2>
+                <p>The typical project structure for Kotlin Multiplatform (KMP) projects is as follows:</p>
+                <div class="directory-structure">
+                    <span class="keyword">project-name</span>/
+                    <br>├── <span class="keyword">build.gradle.kts</span>
+                    <br>├── <span class="keyword">settings.gradle.kts</span>
+                    <br>├── <span class="keyword">shared</span>/
+                    <br>│   ├── <span class="keyword">src</span>/
+                    <br>│   │   ├── <span class="keyword">commonMain</span>/
+                    <br>│   │   ├── <span class="keyword">androidMain</span>/
+                    <br>│   │   └── <span class="keyword">iosMain</span>/
+                    <br>│   ├── <span class="keyword">build.gradle.kts</span>
+                    <br>│   └── <span class="keyword">src</span>/
+                    <br>│       └── <span class="keyword">commonTest</span>/
+                    <br>├── <span class="keyword">androidApp</span>/
+                    <br>│   ├── <span class="keyword">src</span>/
+                    <br>│   │   ├── <span class="keyword">main</span>/
+                    <br>│   │   └── <span class="keyword">test</span>/
+                    <br>│   └── <span class="keyword">build.gradle.kts</span>
+                    <br>└── <span class="keyword">iosApp</span>/
+                    <br>    └── <span class="keyword">build.gradle.kts</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function showSubsection(id) {
+            const subsections = document.querySelectorAll('.section');
+            subsections.forEach(subsection => {
+                if (subsection.id === id) {
+                    subsection.style.display = subsection.style.display === 'block' ? 'none' : 'block';
+                } else {
+                    subsection.style.display = 'none';
+                }
+            });
+        }
+
+        function toggleSection(id) {
+            const section = document.getElementById(id);
+            if (section.style.display === 'block') {
+                section.style.display = 'none';
+            } else {
+                section.style.display = 'block';
+                // Hide other sections when this one is shown
+                const otherSections = document.querySelectorAll('.nested');
+                otherSections.forEach(sec => {
+                    if (sec.id !== id) {
+                        sec.style.display = 'none';
+                    }
+                });
+            }
+        }
+    </script>
+</body>
+</html>
